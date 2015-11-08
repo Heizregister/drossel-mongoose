@@ -38,8 +38,8 @@ drossel.find(model, { foo: 'abc' });
 ```
 
 ### FindOne (model, conditions)
-Find data once.
-return find data object.
+Find data once.  
+return find data object.  
 Tips: If no result, reject "not found".
 ```
 drossel.findOne(model, { foo: 'abc' });
