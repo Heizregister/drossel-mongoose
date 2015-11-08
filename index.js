@@ -3,12 +3,11 @@ var find = require('./libs/find');
 var findById = require('./libs/findById');
 var update = require('./libs/update');
 var remove = require('./libs/remove');
+var teapot = require('./libs/teapot');
 
-function Drossel(model) {
-  this.model = model;
-}
+var drossel = {};
 
-Drossel.prototype.response = function(res, drosselPromise) {
+drossel.response = function(res, drosselPromise) {
   drosselPromise.then(function(result) {
     res.status(200);
     res.json(result);
@@ -18,30 +17,34 @@ Drossel.prototype.response = function(res, drosselPromise) {
   });
 };
 
-Drossel.prototype.create = function(obj) {
-  return create(this.model, obj);
+drossel.create = function(model, obj) {
+  return create(model, obj);
 };
 
-Drossel.prototype.find = function(conditions) {
-  return find(this.model, conditions);
+drossel.find = function(model, conditions) {
+  return find(model, conditions);
 };
 
-Drossel.prototype.findById = function(id) {
-  return findById(this.model, id);
+drossel.findById = function(model, id) {
+  return findById(model, id);
 };
 
-Drossel.prototype.update = function(id, obj) {
+drossel.update = function(model, id, obj) {
   return Promise.resolve().then(function() {
-    return findById(this.model, id);
+    return findById(model, id);
   }).then(function(result) {
-    return update(this.model, id, obj);
+    return update(model, id, obj);
   }).then(function(result) {
-    return findById(this.model, id);
+    return findById(model, id);
   });
 };
 
-Drossel.prototype.remove = function(id) {
-  return remove(this.model, id);
+drossel.remove = function(model, id) {
+  return remove(model, id);
 };
 
-module.exports = Drossel;
+drossel.teapot = function() {
+  return teapot();
+};
+
+module.exports = drossel;
