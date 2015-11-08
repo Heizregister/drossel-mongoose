@@ -27,10 +27,6 @@ module.exports = {
     code: 418,
     message: "failure: I'm a teapot."
   },
-  FAILURE_GATLING: {
-    code: 500,
-    message: 'failure: gatling not complete.'
-  },
   FAILURE: {
     code: 500,
     message: 'failure: internal error.'
