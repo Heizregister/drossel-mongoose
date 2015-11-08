@@ -59,6 +59,12 @@ return null.
 drossel.remove(model, 1234567890abcdef12345678);
 ```
 
+### Teapot
+Only available as a dummy.
+```
+drossel.teapot();
+```
+
 ## Example
 
 drossel returns Promises.  
