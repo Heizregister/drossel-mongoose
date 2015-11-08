@@ -1,10 +1,14 @@
 {
   "name": "drossel",
   "description": "drossel - Unnecessary mongoose wrapper",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "nanocitrus <nanocitrus@gmail.com>",
   "homepage": "http://earlgrey.io/",
   "license": "MIT",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/EarlGreyWorks/drossel.git"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
