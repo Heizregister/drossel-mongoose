@@ -77,8 +77,8 @@ drossel.find(model, {}).then(function(result) {
 // }
 ```
 
-If you're using the "Express",  
-it can response the "res.status()" and "res.json()", when you use the "drossel.response ()".
+If you're using the Express framework,  
+it can response the `res.status()` and `res.json()`, when you use the `drossel.response()`.
 ```
 var router = express.Router();
 router.get('/:id?', function(req, res, next) {
