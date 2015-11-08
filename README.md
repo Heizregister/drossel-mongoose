@@ -37,6 +37,14 @@ Tips: If no result, resolve "no content".
 drossel.find(model, { foo: 'abc' });
 ```
 
+### FindOne (model, conditions)
+Find data once.
+return find data object.
+Tips: If no result, reject "not found".
+```
+drossel.findOne(model, { foo: 'abc' });
+```
+
 ### FindById (model, objectId)
 Find data from ID.  
 return find data object.  
@@ -59,7 +67,7 @@ return null.
 drossel.remove(model, 1234567890abcdef12345678);
 ```
 
-### Teapot
+### Teapot ()
 Only available as a dummy.
 ```
 drossel.teapot();

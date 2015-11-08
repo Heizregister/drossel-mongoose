@@ -1,6 +1,7 @@
 var create = require('./libs/create');
 var find = require('./libs/find');
-var findById = require('./libs/findById');
+var findOne = require('./libs/find-one');
+var findById = require('./libs/find-by-id');
 var update = require('./libs/update');
 var remove = require('./libs/remove');
 var teapot = require('./libs/teapot');
@@ -23,6 +24,10 @@ drossel.create = function(model, obj) {
 
 drossel.find = function(model, conditions) {
   return find(model, conditions);
+};
+
+drossel.findOne = function(model, conditions) {
+  return findOne(model, conditions);
 };
 
 drossel.findById = function(model, id) {
