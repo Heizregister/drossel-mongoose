@@ -1,6 +1,9 @@
 # drossel
 drossel - Unnecessary mongoose wrapper
 
+
+[![NPM](https://nodei.co/npm/drossel.png)](https://nodei.co/npm/drossel/)
+
 ## Install
 step1: npm install
 ```
