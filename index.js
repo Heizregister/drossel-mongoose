@@ -9,7 +9,7 @@ var teapot = require('./libs/teapot');
 
 var drossel = {};
 
-drosse.promise = function() {
+drossel.promise = function() {
   return resolve;
 };
 
