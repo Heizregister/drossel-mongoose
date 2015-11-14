@@ -10,7 +10,7 @@ var teapot = require('./libs/teapot');
 var drossel = {};
 
 drossel.promise = function() {
-  return resolve;
+  return resolve();
 };
 
 drossel.response = function(res, drosselPromise) {
