@@ -4,9 +4,14 @@ var findOne = require('./libs/find-one');
 var findById = require('./libs/find-by-id');
 var update = require('./libs/update');
 var remove = require('./libs/remove');
+var resolve = require('./libs/resolve');
 var teapot = require('./libs/teapot');
 
 var drossel = {};
+
+drosse.promise = function() {
+  return resolve;
+};
 
 drossel.response = function(res, drosselPromise) {
   drosselPromise.then(function(result) {
