@@ -68,14 +68,14 @@ drossel.remove(model, 1234567890abcdef12345678);
 ```
 
 ### Promise ()
-This is useful to align the indentation of ".then".
+This is useful to align the indentation of ".then".  
 return resolve "continue."
 ```
 drossel.promise();
 ```
 
 ### Teapot ()
-This is useful in order to clarify the non-implementation.
+This is useful in order to clarify the non-implementation.  
 return reject "I'm a teapot."
 ```
 drossel.teapot();
