@@ -5,11 +5,12 @@ var findById = require('./libs/find-by-id');
 var update = require('./libs/update');
 var remove = require('./libs/remove');
 var resolve = require('./libs/resolve');
+var forbidden = require('./libs/forbidden');
 var teapot = require('./libs/teapot');
 
 var drossel = {};
 
-drossel.promise = function() {
+drossel.resolve = function() {
   return resolve();
 };
 
@@ -51,6 +52,10 @@ drossel.update = function(model, id, obj) {
 
 drossel.remove = function(model, id) {
   return remove(model, id);
+};
+
+drossel.forbidden = function() {
+  return forbidden();
 };
 
 drossel.teapot = function() {

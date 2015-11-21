@@ -67,11 +67,18 @@ return null.
 drossel.remove(model, 1234567890abcdef12345678);
 ```
 
-### Promise ()
+### Resolve ()
 This is useful to align the indentation of ".then".  
 return resolve "continue."
 ```
-drossel.promise();
+drossel.resolve();
+```
+
+### Forbidden ()
+This is useful to indicate that do not have access.
+return reject "forbidden."
+```
+drossel.forbidden();
 ```
 
 ### Teapot ()

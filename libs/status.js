@@ -23,6 +23,10 @@ module.exports = {
     code: 400,
     message: 'failure: require parameter.'
   },
+  FAILURE_FORBIDDEN: {
+    code: 403,
+    message: 'failure: forbidden.'
+  },
   FAILURE_NOT_FOUND: {
     code: 404,
     message: 'failure: not found.'
