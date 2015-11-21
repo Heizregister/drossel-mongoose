@@ -16,8 +16,8 @@ module.exports = function FindOne(model, conditions) {
         reject(response(status.FAILURE));
         return;
       }
-      if (!result.length) {
-        reject(response(status.FAILURE_NOT_FOUND, null));
+      if (!result) {
+        reject(response(status.FAILURE_NOT_FOUND));
         return;
       }
       resolve(response(status.SUCCESS, result));
