@@ -67,7 +67,7 @@ return null.
 drossel.remove(model, 1234567890abcdef12345678);
 ```
 
-### Resolve (opt_args)
+### Resolve (null|object|array)
 This is useful when you want to continue the process.  
 return resolve "continue."
 ```
@@ -88,7 +88,7 @@ return reject "I'm a teapot."
 drossel.teapot();
 ```
 
-### Response ()
+### Response (res, promises)
 This is useful when you are using the "Express".  
 execute `res.status()` and `res.json()` .
 ```
