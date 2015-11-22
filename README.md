@@ -67,15 +67,15 @@ return null.
 drossel.remove(model, 1234567890abcdef12345678);
 ```
 
-### Resolve ()
-This is useful to align the indentation of ".then".  
+### Resolve (opt_args)
+This is useful when you want to continue the process.  
 return resolve "continue."
 ```
-drossel.resolve();
+drossel.resolve(opt_args);
 ```
 
 ### Forbidden ()
-This is useful to indicate that do not have access.
+This is useful to indicate that do not have access.  
 return reject "forbidden."
 ```
 drossel.forbidden();
@@ -86,6 +86,13 @@ This is useful in order to clarify the non-implementation.
 return reject "I'm a teapot."
 ```
 drossel.teapot();
+```
+
+### Response ()
+This is useful when you are using the "Express".  
+execute `res.status()` and `res.json()` .
+```
+drossel.response(res, drossel.someFunction());
 ```
 
 ## Example
