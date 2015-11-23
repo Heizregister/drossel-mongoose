@@ -1,8 +1,4 @@
 module.exports = {
-  CONTINUE: {
-    code: 100,
-    message: 'continue.'
-  },
   SUCCESS: {
     code: 200,
     message: 'success.'

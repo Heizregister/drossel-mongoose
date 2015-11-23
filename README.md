@@ -69,7 +69,7 @@ drossel.remove(model, 1234567890abcdef12345678);
 
 ### Resolve (null|object|array)
 This is useful when you want to continue the process.  
-return resolve "continue."
+return resolve "success."
 ```
 drossel.resolve(opt_args);
 ```
