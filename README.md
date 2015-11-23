@@ -70,7 +70,7 @@ drossel.remove(model, 1234567890abcdef12345678);
 ### Resolve (null|object|array)
 This is useful when you want to continue the process.  
 if something arguments, return resolve "success."  
-if empty array arguments, return resolve "no content."  
+if empty array or empty object arguments, return resolve "no content."  
 if no arguments, return resolve "continue."
 ```
 drossel.resolve(opt_args);
