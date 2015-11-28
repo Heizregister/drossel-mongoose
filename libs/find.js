@@ -17,7 +17,7 @@ module.exports = function Find(model, conditions) {
         return;
       }
       if (!result.length) {
-        resolve(response(status.SUCCESS_NO_CONTENT, null));
+        resolve(response(status.SUCCESS_NO_CONTENT, result));
         return;
       }
       resolve(response(status.SUCCESS, result));
