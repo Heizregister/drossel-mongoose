@@ -1,8 +1,11 @@
 # drossel
 drossel - Unnecessary mongoose wrapper
 
-
 [![NPM](https://nodei.co/npm/drossel.png)](https://nodei.co/npm/drossel/)
+
+## Notice
+This module is unstable probably, and repeat irresponsible update.  
+I recommended to hobby use only (´・ω・`)  
 
 ## Install
 step1: npm install
