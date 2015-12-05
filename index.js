@@ -6,7 +6,6 @@ var update = require('./libs/update');
 var remove = require('./libs/remove');
 
 var drossel = {};
-drossel.status = {};
 
 //--------------------------------------------------
 // database
@@ -44,8 +43,8 @@ drossel.remove = function(model, id) {
 //--------------------------------------------------
 // status
 //--------------------------------------------------
-// 2xx
-drossel.status.resolve = function(data) {
+// 1xx, 2xx
+drossel.resolve = function(data) {
   // 100 continue
   if (data === undefined || data === null) {
     return Promise.resolve(response(status.CONTINUE));
@@ -59,22 +58,22 @@ drossel.status.resolve = function(data) {
 };
 
 // 403 forbidden
-drossel.status.forbidden = function() {
+drossel.forbidden = function() {
   return Promise.reject(response(status.FAILURE_FORBIDDEN));
 };
 
 // 404 not found
-drossel.status.notFound = function() {
+drossel.notFound = function() {
   return Promise.reject(response(status.FAILURE_NOT_FOUND));
 };
 
 // 409 conflict
-drossel.status.conflict = function() {
+drossel.conflict = function() {
   return Promise.reject(response(status.FAILURE_CONFLICT));
 };
 
 // 418 teapot
-drossel.status.teapot = function() {
+drossel.teapot = function() {
   return Promise.reject(response(status.FAILURE_TEAPOT));
 };
 

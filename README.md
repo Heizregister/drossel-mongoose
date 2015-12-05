@@ -4,7 +4,7 @@ drossel - Unnecessary mongoose wrapper
 [![NPM](https://nodei.co/npm/drossel.png)](https://nodei.co/npm/drossel/)
 
 ## What is this?
-drossel to add value similar to the HTTP status code, on the results of the mongoose.  
+drossel add value similar to the HTTP status code, on the results of the mongoose.  
 This module is repeat irresponsible update. I recommended to hobby use only (´・ω・`)  
 
 ## Install
