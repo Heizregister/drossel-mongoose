@@ -61,12 +61,12 @@ drossel.resolve = function(data) {
 
 // 400 bad request
 drossel.badRequest = function() {
-  return Promse.reject(response(status.FAILURE_BAD_REQUEST));
+  return Promise.reject(response(status.FAILURE_BAD_REQUEST));
 };
 
 // 401 unauthorized
 drossel.unauthorized = function() {
-  return Promse.reject(response(status.FAILURE_UNAUTHORIZED));
+  return Promise.reject(response(status.FAILURE_UNAUTHORIZED));
 };
 
 // 403 forbidden
