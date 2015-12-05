@@ -32,7 +32,7 @@ module.exports = {
     message: 'failure: not found.'
   },
   FAILURE_CONFLICT: {
-    code: 404,
+    code: 409,
     message: 'failure: conflict.'
   },
   FAILURE_TEAPOT: {
