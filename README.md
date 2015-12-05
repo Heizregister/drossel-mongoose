@@ -80,26 +80,38 @@ if other arguments, return resolve "success."
 drossel.resolve(opt_args);
 ```
 
+### BadRequest ()
+return reject "400 Bad Request"
+```
+drossel.badRequest();
+```
+
+### Unauthorized ()
+return reject "401 Unauthorized"
+```
+drossel.unauthorized();
+```
+
 ### Forbidden ()
-return reject "forbidden."
+return reject "403 Forbidden"
 ```
 drossel.forbidden();
 ```
 
 ### NotFound ()
-return reject "not found."
+return reject "404 Not Found"
 ```
 drossel.notFound();
 ```
 
 ### Conflict ()
-return reject "conflict."
+return reject "409 Conflict"
 ```
 drossel.conflict();
 ```
 
 ### Teapot ()
-return reject "I'm a teapot."
+return reject "418 I'm a teapot"
 ```
 drossel.teapot();
 ```

@@ -5,15 +5,15 @@ module.exports = function Find(model, conditions) {
   return new Promise(function(resolve, reject) {
     model.find(conditions, function(err, result) {
       if (err && err.name == 'ValidationError') {
-        reject(response(status.FAILURE_VALIDATION));
+        reject(response(status.FAILURE_BAD_REQUEST));
         return;
       }
       if (err && err.name == 'CastError') {
-        reject(response(status.FAILURE_CAST));
+        reject(response(status.FAILURE_BAD_REQUEST));
         return;
       }
       if (err) {
-        reject(response(status.FAILURE));
+        reject(response(status.FAILURE_INTERNAL));
         return;
       }
       if (!result.length) {

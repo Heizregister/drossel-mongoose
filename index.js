@@ -59,6 +59,16 @@ drossel.resolve = function(data) {
   return Promise.resolve(response(status.SUCCESS, data));
 };
 
+// 400 bad request
+drossel.badRequest = function() {
+  return Promse.reject(response(status.FAILURE_BAD_REQUEST));
+};
+
+// 401 unauthorized
+drossel.unauthorized = function() {
+  return Promse.reject(response(status.FAILURE_UNAUTHORIZED));
+};
+
 // 403 forbidden
 drossel.forbidden = function() {
   return Promise.reject(response(status.FAILURE_FORBIDDEN));

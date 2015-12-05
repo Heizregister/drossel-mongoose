@@ -1,46 +1,42 @@
 module.exports = {
   CONTINUE: {
     code: 100,
-    message: 'continue.'
+    message: 'Informational: 100 Continue'
   },
   SUCCESS: {
     code: 200,
-    message: 'success.'
+    message: 'Success: 200 OK'
   },
   SUCCESS_NO_CONTENT: {
     code: 204,
-    message: 'no content.'
+    message: 'Success: 204 No Content'
   },
-  FAILURE_VALIDATION: {
+  FAILURE_BAD_REQUEST: {
     code: 400,
-    message: 'failure: validation failed.'
+    message: 'Failure: 400 Bad Request'
   },
-  FAILURE_CAST: {
-    code: 400,
-    message: 'failure: cast failed.'
-  },
-  FAILURE_REQUIRE_PARAMETER: {
-    code: 400,
-    message: 'failure: require parameter.'
+  FAILURE_UNAUTHORIZED: {
+    code: 401,
+    message: 'Failure: 401 Unauthorized'
   },
   FAILURE_FORBIDDEN: {
     code: 403,
-    message: 'failure: forbidden.'
+    message: 'Failure: 403 Forbidden'
   },
   FAILURE_NOT_FOUND: {
     code: 404,
-    message: 'failure: not found.'
+    message: 'Failure: 404 Not Found'
   },
   FAILURE_CONFLICT: {
     code: 409,
-    message: 'failure: conflict.'
+    message: 'Failure: 409 Conflict'
   },
   FAILURE_TEAPOT: {
     code: 418,
-    message: "failure: I'm a teapot."
+    message: "Failure: 418 I'm a teapot"
   },
-  FAILURE: {
+  FAILURE_INTERNAL: {
     code: 500,
-    message: 'failure: internal error.'
+    message: 'Failure: 500 Internal Server Error'
   }
 };
