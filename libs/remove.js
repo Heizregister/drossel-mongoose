@@ -11,4 +11,4 @@ module.exports = function Remove(model, id) {
       resolve(response(status.SUCCESS, null));
     });
   });
-}
+};

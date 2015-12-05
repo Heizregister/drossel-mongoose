@@ -23,4 +23,4 @@ module.exports = function FindOne(model, conditions) {
       resolve(response(status.SUCCESS, result));
     });
   });
-}
+};

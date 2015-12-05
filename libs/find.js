@@ -23,4 +23,4 @@ module.exports = function Find(model, conditions) {
       resolve(response(status.SUCCESS, result));
     });
   });
-}
+};

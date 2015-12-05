@@ -3,9 +3,9 @@ drossel - Unnecessary mongoose wrapper
 
 [![NPM](https://nodei.co/npm/drossel.png)](https://nodei.co/npm/drossel/)
 
-## Notice
-This module is unstable probably, and repeat irresponsible update.  
-I recommended to hobby use only (´・ω・`)  
+## What is this?
+drossel to add value similar to the HTTP status code, on the results of the mongoose.  
+This module is repeat irresponsible update. I recommended to hobby use only (´・ω・`)  
 
 ## Install
 step1: npm install
@@ -23,7 +23,7 @@ var model = mongoose.model('Example', new mongoose.Schema({
 }));
 ```
 
-## Usage
+## Usage (database operation)
 
 ### Create (model, obj)
 Create data.  
@@ -70,9 +70,11 @@ return null.
 drossel.remove(model, 1234567890abcdef12345678);
 ```
 
-### Resolve (null|object|array)
+## Usage (optional)
+
+### Resolve (*)
 This is useful when you want to continue the process.  
-if undefined arguments, return resolve "continue."  
+if undefined or null arguments, return resolve "continue."  
 if empty array arguments, return resolve "no content."  
 if other arguments, return resolve "success."
 ```
@@ -80,14 +82,24 @@ drossel.resolve(opt_args);
 ```
 
 ### Forbidden ()
-This is useful to indicate that do not have access.  
 return reject "forbidden."
 ```
 drossel.forbidden();
 ```
 
+### NotFound ()
+return reject "not found."
+```
+drossel.notFound();
+```
+
+### Conflict ()
+return reject "conflict."
+```
+drossel.conflict();
+```
+
 ### Teapot ()
-This is useful in order to clarify the non-implementation.  
 return reject "I'm a teapot."
 ```
 drossel.teapot();
@@ -101,7 +113,6 @@ drossel.response(res, drossel.someFunction());
 ```
 
 ## Example
-
 drossel returns Promises.  
 results included status and data.
 ```

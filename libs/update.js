@@ -19,4 +19,4 @@ module.exports = function Update(model, id, obj) {
       resolve(response(status.SUCCESS, result));
     });
   });
-}
+};

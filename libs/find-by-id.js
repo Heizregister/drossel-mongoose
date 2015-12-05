@@ -23,4 +23,4 @@ module.exports = function FindById(model, id) {
       resolve(response(status.SUCCESS, result));
     });
   });
-}
+};

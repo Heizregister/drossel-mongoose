@@ -4,26 +4,13 @@ var findOne = require('./libs/find-one');
 var findById = require('./libs/find-by-id');
 var update = require('./libs/update');
 var remove = require('./libs/remove');
-var resolve = require('./libs/resolve');
-var forbidden = require('./libs/forbidden');
-var teapot = require('./libs/teapot');
 
 var drossel = {};
+drossel.status = {};
 
-drossel.resolve = function(data) {
-  return resolve(data);
-};
-
-drossel.response = function(res, drosselPromise) {
-  drosselPromise.then(function(result) {
-    res.status(200);
-    res.json(result);
-  }).catch(function(error) {
-    res.status(error.status.code);
-    res.json(error);
-  });
-};
-
+//--------------------------------------------------
+// database
+//--------------------------------------------------
 drossel.create = function(model, obj) {
   return create(model, obj);
 };
@@ -54,12 +41,54 @@ drossel.remove = function(model, id) {
   return remove(model, id);
 };
 
-drossel.forbidden = function() {
-  return forbidden();
+//--------------------------------------------------
+// status
+//--------------------------------------------------
+// 2xx
+drossel.status.resolve = function(data) {
+  // 100 continue
+  if (data === undefined || data === null) {
+    return Promise.resolve(response(status.CONTINUE));
+  }
+  // 204 no content
+  if (data && data.length === 0) {
+    return Promise.resolve(response(status.SUCCESS_NO_CONTENT, data));
+  }
+  // 200 success
+  return Promise.resolve(response(status.SUCCESS, data));
 };
 
-drossel.teapot = function() {
-  return teapot();
+// 403 forbidden
+drossel.status.forbidden = function() {
+  return Promise.reject(response(status.FAILURE_FORBIDDEN));
+};
+
+// 404 not found
+drossel.status.notFound = function() {
+  return Promise.reject(response(status.FAILURE_NOT_FOUND));
+};
+
+// 409 conflict
+drossel.status.conflict = function() {
+  return Promise.reject(response(status.FAILURE_CONFLICT));
+};
+
+// 418 teapot
+drossel.status.teapot = function() {
+  return Promise.reject(response(status.FAILURE_TEAPOT));
+};
+
+//--------------------------------------------------
+// express useful
+//--------------------------------------------------
+drossel.response = function(res, drosselPromise) {
+  drosselPromise.then(function(result) {
+    res.status(200);
+    res.json(result);
+  }).catch(function(error) {
+    res.status(error.status.code);
+    res.json(error);
+  });
 };
 
 module.exports = drossel;

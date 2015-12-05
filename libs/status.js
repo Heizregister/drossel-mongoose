@@ -31,6 +31,10 @@ module.exports = {
     code: 404,
     message: 'failure: not found.'
   },
+  FAILURE_CONFLICT: {
+    code: 404,
+    message: 'failure: conflict.'
+  },
   FAILURE_TEAPOT: {
     code: 418,
     message: "failure: I'm a teapot."

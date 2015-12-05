@@ -19,4 +19,4 @@ module.exports = function Create(model, obj) {
       resolve(response(status.SUCCESS, result));
     });
   });
-}
+};
