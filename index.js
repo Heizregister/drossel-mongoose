@@ -4,6 +4,7 @@ var findOne = require('./libs/find-one');
 var findById = require('./libs/find-by-id');
 var update = require('./libs/update');
 var remove = require('./libs/remove');
+var response = require('./libs/response');
 
 var drossel = {};
 
