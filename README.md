@@ -71,7 +71,7 @@ drossel.remove(model, 1234567890abcdef12345678);
 
 ## Usage (optional)
 
-### Resolve (*)
+### Resolve ()
 This is useful when you want to continue the process.  
 if undefined or null arguments, return resolve "continue."  
 if empty array arguments, return resolve "no content."  
@@ -114,6 +114,13 @@ drossel.conflict();
 return reject "418 I'm a teapot"
 ```
 drossel.teapot();
+```
+
+### All (Array<promises>)
+This is customized Promise.all().  
+if onFulfilled, each status will be omitted.
+```
+drossel.all([drossel.find(), drossel.find(), drossel.find()]);
 ```
 
 ### Response (res, promises)

@@ -90,8 +90,19 @@ drossel.teapot = function() {
 };
 
 //--------------------------------------------------
-// express useful
+// useful
 //--------------------------------------------------
+// customized Promise.all
+drossel.all = function(drosselPromises) {
+  return Promise.all(drosselPromises).then(function(results) {
+    var data = _.map(results, function(item) {
+      return item.data;
+    });
+    return Promise.resolve(response(status.SUCCESS, data));
+  });
+}
+
+// Express framework friendly
 drossel.response = function(res, drosselPromise) {
   drosselPromise.then(function(result) {
     res.status(200);
