@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var create = require('./libs/create');
 var find = require('./libs/find');
 var findOne = require('./libs/find-one');
