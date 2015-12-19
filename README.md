@@ -1,20 +1,20 @@
-# drossel
-drossel - Unnecessary mongoose wrapper
+# drossel-mongoose
+Unnecessary mongoose wrapper
 
-[![NPM](https://nodei.co/npm/drossel.png)](https://nodei.co/npm/drossel/)
+[![NPM](https://nodei.co/npm/drossel-mongoose.png)](https://nodei.co/npm/drossel-mongoose/)
 
 ## What is this?
-drossel add value similar to the HTTP status code, on the results of the mongoose.
+"drossel-mongoose" add value similar to the HTTP status code, on the results of the mongoose.
 
 ## Install
 step1: npm install
 ```
-npm install drossel
+npm install drossel-mongoose
 ```
 
 step2: require and prepare mongoose.model
 ```
-var drossel = require('drossel');
+var drmg = require('drossel-mongoose');
 var mongoose = require('mongoose');
 var model = mongoose.model('Example', new mongoose.Schema({
   foo: { type: String },
@@ -28,7 +28,7 @@ var model = mongoose.model('Example', new mongoose.Schema({
 Create data.  
 return created data object.
 ```
-drossel.create(model, { foo: 'abc', bar: 123 });
+drmg.create(model, { foo: 'abc', bar: 123 });
 ```
 
 ### Find (model, conditions)
@@ -36,7 +36,7 @@ Find data.
 return find data objects array.  
 Tips: If no result, resolve "no content".
 ```
-drossel.find(model, { foo: 'abc' });
+drmg.find(model, { foo: 'abc' });
 ```
 
 ### FindOne (model, conditions)
@@ -44,7 +44,7 @@ Find data once.
 return find data object.  
 Tips: If no result, reject "not found".
 ```
-drossel.findOne(model, { foo: 'abc' });
+drmg.findOne(model, { foo: 'abc' });
 ```
 
 ### FindById (model, objectId)
@@ -52,21 +52,21 @@ Find data from ID.
 return find data object.  
 Tips: If no result, reject "not found".
 ```
-drossel.findById(model, 1234567890abcdef12345678);
+drmg.findById(model, 1234567890abcdef12345678);
 ```
 
 ### Update (model, objectId, obj)
 Update data.  
 return updated data object.
 ```
-drossel.update(model, 1234567890abcdef12345678, { foo: 'xyz', bar: 456 });
+drmg.update(model, 1234567890abcdef12345678, { foo: 'xyz', bar: 456 });
 ```
 
 ### Remove (model, objectId)
 Remove data.  
 return null.
 ```
-drossel.remove(model, 1234567890abcdef12345678);
+drmg.remove(model, 1234567890abcdef12345678);
 ```
 
 ## Usage (optional)
@@ -77,64 +77,64 @@ if undefined or null arguments, return resolve "continue."
 if empty array arguments, return resolve "no content."  
 if other arguments, return resolve "success."
 ```
-drossel.resolve(opt_args);
+drmg.resolve(opt_args);
 ```
 
 ### BadRequest ()
 return reject "400 Bad Request"
 ```
-drossel.badRequest();
+drmg.badRequest();
 ```
 
 ### Unauthorized ()
 return reject "401 Unauthorized"
 ```
-drossel.unauthorized();
+drmg.unauthorized();
 ```
 
 ### Forbidden ()
 return reject "403 Forbidden"
 ```
-drossel.forbidden();
+drmg.forbidden();
 ```
 
 ### NotFound ()
 return reject "404 Not Found"
 ```
-drossel.notFound();
+drmg.notFound();
 ```
 
 ### Conflict ()
 return reject "409 Conflict"
 ```
-drossel.conflict();
+drmg.conflict();
 ```
 
 ### Teapot ()
 return reject "418 I'm a teapot"
 ```
-drossel.teapot();
+drmg.teapot();
 ```
 
 ### All (Array<promises>)
 This is customized Promise.all().  
 if onFulfilled, each status will be omitted.
 ```
-drossel.all([drossel.find(), drossel.find(), drossel.find()]);
+drmg.all([drmg.find(), drmg.find(), drmg.find()]);
 ```
 
 ### Response (res, promises)
 This is useful when you are using the "Express".  
 execute `res.status()` and `res.json()` .
 ```
-drossel.response(res, drossel.someFunction());
+drmg.response(res, drmg.someFunction());
 ```
 
 ## Example
-drossel returns Promises.  
+drossel-mongoose returns Promises.  
 results included status and data.
 ```
-drossel.find(model, {}).then(function(result) {
+drmg.find(model, {}).then(function(result) {
   console.log(result);
 });
 
@@ -148,10 +148,10 @@ drossel.find(model, {}).then(function(result) {
 ```
 
 If you're using the Express framework,  
-it can response the `res.status()` and `res.json()`, when you use the `drossel.response()`.
+it can response the `res.status()` and `res.json()`, when you use the `drmg.response()`.
 ```
 var router = express.Router();
 router.get('/:id?', function(req, res, next) {
-  drossel.response(res, drossel.findById(model, req.params.id));
+  drmg.response(res, drmg.findById(model, req.params.id));
 };
 ```
