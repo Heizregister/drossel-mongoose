@@ -1,13 +1,13 @@
 {
   "name": "drossel-mongoose",
   "description": "Unnecessary mongoose wrapper",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "nanocloudx <nanocloudx@gmail.com>",
   "homepage": "http://drossel.io/",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Heizregister/drossel.git"
+    "url": "https://github.com/Heizregister/drossel-mongoose.git"
   },
   "main": "index.js",
   "scripts": {
