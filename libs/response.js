@@ -1,8 +1,8 @@
 function response(status, data) {
-  return Promise.resolve({
+  return {
     status: status,
     data: data ? data : null
-  });
+  };
 }
 
 module.exports = response;

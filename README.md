@@ -71,22 +71,23 @@ drmg.all([
 ]);
 ```
 
-### response (status, data)
-return custom drossel-mongoose response.
-```
-drmg.response(drmg.status.SUCCESS, {
-  lgtm: 'Looks Good To Me!'
-});
-```
-
 ### status
-return HTTP status code list.
+return HTTP status code list.  
+ex) SUCCESS, NOT_FOUND, BAD_REQUEST, TEAPOT, ...
 ```
 console.log(drmg.status.SUCCESS) //200
 ```
 
+### response (status, data)
+return custom drossel-mongoose response.
+```
+drmg.response(drmg.status.SUCCESS, {
+  lgtm: 'LGTM!'
+}); // {status: 200, data: {lgtm: 'LGTM!'}}
+```
+
 ### expressResponse (res, response)
-useful to Express framework.
+useful to Express framework.  
 Please refer to the example of use for more information.
 
 ## Example

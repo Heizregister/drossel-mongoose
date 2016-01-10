@@ -14,7 +14,7 @@ var drmg = {};
  *
  * @param {Object} model mongoose model
  * @param {Object} obj update data
- * @return {Primises} drosselMongooseResult
+ * @return {Promise.<Object>}
  */
 drmg.create = function(model, obj) {
   return create(model, obj);
@@ -25,7 +25,7 @@ drmg.create = function(model, obj) {
  *
  * @param {Object} model mongoose model
  * @param {Object} target conditions
- * @return {Primises} drosselMongooseResult
+ * @return {Promise.<Object>}
  */
 drmg.find = function(model, conditions) {
   return find(model, conditions);
@@ -36,7 +36,7 @@ drmg.find = function(model, conditions) {
  *
  * @param {Object} model mongoose model
  * @param {ObjectId} id mongodb object id
- * @return {Primises} drosselMongooseResult
+ * @return {Promise.<Object>}
  */
 drmg.findById = function(model, id) {
   return findById(model, id);
@@ -48,7 +48,7 @@ drmg.findById = function(model, id) {
  * @param {Object} model mongoose model
  * @param {ObjectId} id mongodb object id
  * @param {Object} obj update data
- * @return {Primises} drosselMongooseResult
+ * @return {Promise.<Object>}
  */
 drmg.update = function(model, id, obj) {
   return update(model, id, obj);
@@ -59,7 +59,7 @@ drmg.update = function(model, id, obj) {
  *
  * @param {Object} model mongoose model
  * @param {Object} target conditions
- * @return {Primises} drosselMongooseResult
+ * @return {Promise.<Object>}
  */
 drmg.remove = function(model, conditions) {
   return remove(model, conditions);
@@ -69,9 +69,16 @@ drmg.remove = function(model, conditions) {
  * expressResponse (Express framework friendly)
  *
  * @param {Object} res Express response object
- * @param {Promises} response drossel-mongoose response
+ * @param {Promise.<Object>|Object} response drossel-mongoose response
  */
 drmg.expressResponse = function(res, response) {
+  // custom response
+  if (response.status) {
+    res.status(response.status);
+    res.json(response.data ? response.data : null);
+    return;
+  }
+
   response.then(function(result) {
     res.status(200);
     res.json(result.data);
@@ -87,7 +94,7 @@ drmg.expressResponse = function(res, response) {
  *
  * @param {Number} status HTTP status code
  * @param {Object} data JSON result
- * @return {Promise}
+ * @return {Object} drossel-mongoose response
  */
 drmg.response = response;
 
@@ -102,7 +109,7 @@ drmg.status = status;
  * all
  *
  * @param {Array} arr many drosselMongooseResult
- * @return {Primise} drossel-mongoose response
+ * @return {Promise.<Object>}
  */
 drmg.all = function(arr) {
   return Promise.all(arr).then(function(results) {
