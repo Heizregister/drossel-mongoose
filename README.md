@@ -61,6 +61,22 @@ return null.
 drmg.remove(model, { _id: 1234567890abcdef12345678 });
 ```
 
+### All (array)
+Promise.all for drossel-mongoose.  
+return drossel-mongoose result.
+```
+drmg.all([
+  drmg.find(model, {foo: 'foo'}),
+  drmg.remove(model, {bar: 'bar'})
+]);
+```
+
+### status
+return HTTP status code list.
+```
+console.log(drmg.status.SUCCESS) //200
+```
+
 ## Example
 drossel-mongoose returns Promises.  
 results included status and data.

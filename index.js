@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var create = require('./libs/create');
 var find = require('./libs/find');
 var findById = require('./libs/find-by-id');
@@ -68,8 +69,8 @@ drmg.remove = function(model, conditions) {
  *
  * @param {Object} res Express response object
  * @param {Promises|Object} obj drossel-mongoose result (or custom response)
- * @param {Number} drosselMongooseResult.status HTTP status code
- * @param {Object} drosselMongooseResult.data result json
+ * @param {Number} obj.status HTTP status code
+ * @param {Object} obj.data result json
  */
 drmg.response = function(res, obj) {
   // custom response
@@ -87,7 +88,7 @@ drmg.response = function(res, obj) {
     res.json(null);
   });
   return;
-}
+};
 
 /**
  * status
@@ -95,5 +96,23 @@ drmg.response = function(res, obj) {
  * @return {Object} HTTP status code constants
  */
 drmg.status = status;
+
+/**
+ * all
+ *
+ * @param {Array} arr many drosselMongooseResult
+ * @return {Primises} drosselMongooseResult
+ */
+drmg.all = function(arr) {
+  return Promise.all(arr).then(function(results) {
+    var data = _.map(results, function(item) {
+      return item.data;
+    });
+    return {
+      status: 200,
+      data: data;
+    }
+  });
+};
 
 module.exports = drmg;
