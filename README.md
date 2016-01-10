@@ -22,7 +22,7 @@ var model = mongoose.model('Example', new mongoose.Schema({
 }));
 ```
 
-## Usage (database operation)
+## Usage
 
 ### Create (model, obj)
 Create data.  
@@ -37,14 +37,6 @@ return find data objects array.
 Tips: If no result, resolve "no content".
 ```
 drmg.find(model, { foo: 'abc' });
-```
-
-### FindOne (model, conditions)
-Find data once.  
-return find data object.  
-Tips: If no result, reject "not found".
-```
-drmg.findOne(model, { foo: 'abc' });
 ```
 
 ### FindById (model, objectId)
@@ -62,72 +54,11 @@ return updated data object.
 drmg.update(model, 1234567890abcdef12345678, { foo: 'xyz', bar: 456 });
 ```
 
-### Remove (model, objectId)
+### Remove (model, conditions)
 Remove data.  
 return null.
 ```
-drmg.remove(model, 1234567890abcdef12345678);
-```
-
-## Usage (optional)
-
-### Resolve ()
-This is useful when you want to continue the process.  
-if undefined or null arguments, return resolve "continue."  
-if empty array arguments, return resolve "no content."  
-if other arguments, return resolve "success."
-```
-drmg.resolve(opt_args);
-```
-
-### BadRequest ()
-return reject "400 Bad Request"
-```
-drmg.badRequest();
-```
-
-### Unauthorized ()
-return reject "401 Unauthorized"
-```
-drmg.unauthorized();
-```
-
-### Forbidden ()
-return reject "403 Forbidden"
-```
-drmg.forbidden();
-```
-
-### NotFound ()
-return reject "404 Not Found"
-```
-drmg.notFound();
-```
-
-### Conflict ()
-return reject "409 Conflict"
-```
-drmg.conflict();
-```
-
-### Teapot ()
-return reject "418 I'm a teapot"
-```
-drmg.teapot();
-```
-
-### All (Array<promises>)
-This is customized Promise.all().  
-if onFulfilled, each status will be omitted.
-```
-drmg.all([drmg.find(), drmg.find(), drmg.find()]);
-```
-
-### Response (res, promises)
-This is useful when you are using the "Express".  
-execute `res.status()` and `res.json()` .
-```
-drmg.response(res, drmg.someFunction());
+drmg.remove(model, { _id: 1234567890abcdef12345678 });
 ```
 
 ## Example
@@ -139,10 +70,7 @@ drmg.find(model, {}).then(function(result) {
 });
 
 // {
-//   status: {
-//     code: 200,
-//     message: 'success.'
-//   },
+//   status: 200,
 //   data: [{ foo: 'abc', bar: 123 }]
 // }
 ```
@@ -153,5 +81,16 @@ it can response the `res.status()` and `res.json()`, when you use the `drmg.resp
 var router = express.Router();
 router.get('/:id?', function(req, res, next) {
   drmg.response(res, drmg.findById(model, req.params.id));
+};
+```
+
+and, it can custom response.
+```
+var router = express.Router();
+router.get('/', function(req, res, next) {
+  drmg.response(res, {
+    status: drmg.status.SUCCESS,
+    data: { lgtm: 'Looks Good To Me!' }
+  });
 };
 ```

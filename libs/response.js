@@ -1,6 +1,8 @@
-module.exports = function Response(status, data) {
+function response(status, data) {
   return {
     status: status,
-    data: data
-  };
-};
+    data: data ? data : null
+  }
+}
+
+module.exports = response;

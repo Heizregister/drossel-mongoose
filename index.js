@@ -1,117 +1,99 @@
-var _ = require('lodash');
 var create = require('./libs/create');
 var find = require('./libs/find');
-var findOne = require('./libs/find-one');
 var findById = require('./libs/find-by-id');
 var update = require('./libs/update');
 var remove = require('./libs/remove');
-var response = require('./libs/response');
 var status = require('./libs/status');
 
-var drossel = {};
+var drmg = {};
 
-//--------------------------------------------------
-// database
-//--------------------------------------------------
-drossel.create = function(model, obj) {
+/**
+ * create
+ *
+ * @param {Object} model mongoose model
+ * @param {Object} obj update data
+ * @return {Primises} drosselMongooseResult
+ */
+drmg.create = function(model, obj) {
   return create(model, obj);
 };
 
-drossel.find = function(model, conditions) {
+/**
+ * find
+ *
+ * @param {Object} model mongoose model
+ * @param {Object} target conditions
+ * @return {Primises} drosselMongooseResult
+ */
+drmg.find = function(model, conditions) {
   return find(model, conditions);
 };
 
-drossel.findOne = function(model, conditions) {
-  return findOne(model, conditions);
-};
-
-drossel.findById = function(model, id) {
+/**
+ * findById
+ *
+ * @param {Object} model mongoose model
+ * @param {ObjectId} id mongodb object id
+ * @return {Primises} drosselMongooseResult
+ */
+drmg.findById = function(model, id) {
   return findById(model, id);
 };
 
-drossel.update = function(model, id, obj) {
-  return Promise.resolve().then(function() {
-    return findById(model, id);
-  }).then(function(result) {
-    return update(model, id, obj);
-  }).then(function(result) {
-    return findById(model, id);
-  });
+/**
+ * update
+ *
+ * @param {Object} model mongoose model
+ * @param {ObjectId} id mongodb object id
+ * @param {Object} obj update data
+ * @return {Primises} drosselMongooseResult
+ */
+drmg.update = function(model, id, obj) {
+  return update(model, id, obj);
 };
 
-drossel.remove = function(model, id) {
-  return remove(model, id);
+/**
+ * remove
+ *
+ * @param {Object} model mongoose model
+ * @param {Object} target conditions
+ * @return {Primises} drosselMongooseResult
+ */
+drmg.remove = function(model, conditions) {
+  return remove(model, conditions);
 };
 
-//--------------------------------------------------
-// status
-//--------------------------------------------------
-// 1xx, 2xx
-drossel.resolve = function(data) {
-  // 100 continue
-  if (data === undefined || data === null) {
-    return Promise.resolve(response(status.CONTINUE));
+/**
+ * response (Express framework friendly)
+ *
+ * @param {Object} res Express response object
+ * @param {Promises|Object} obj drossel-mongoose result (or custom response)
+ * @param {Number} drosselMongooseResult.status HTTP status code
+ * @param {Object} drosselMongooseResult.data result json
+ */
+drmg.response = function(res, obj) {
+  // custom response
+  if (obj.status) {
+    res.status(obj.status);
+    res.json(obj.data ? obj.data : null);
+    return;
   }
-  // 204 no content
-  if (data && data.length === 0) {
-    return Promise.resolve(response(status.SUCCESS_NO_CONTENT, data));
-  }
-  // 200 success
-  return Promise.resolve(response(status.SUCCESS, data));
-};
 
-// 400 bad request
-drossel.badRequest = function() {
-  return Promise.reject(response(status.FAILURE_BAD_REQUEST));
-};
-
-// 401 unauthorized
-drossel.unauthorized = function() {
-  return Promise.reject(response(status.FAILURE_UNAUTHORIZED));
-};
-
-// 403 forbidden
-drossel.forbidden = function() {
-  return Promise.reject(response(status.FAILURE_FORBIDDEN));
-};
-
-// 404 not found
-drossel.notFound = function() {
-  return Promise.reject(response(status.FAILURE_NOT_FOUND));
-};
-
-// 409 conflict
-drossel.conflict = function() {
-  return Promise.reject(response(status.FAILURE_CONFLICT));
-};
-
-// 418 teapot
-drossel.teapot = function() {
-  return Promise.reject(response(status.FAILURE_TEAPOT));
-};
-
-//--------------------------------------------------
-// useful
-//--------------------------------------------------
-// customized Promise.all
-drossel.all = function(drosselPromises) {
-  return Promise.all(drosselPromises).then(function(results) {
-    var data = _.map(results, function(item) {
-      return item.data;
-    });
-    return Promise.resolve(response(status.SUCCESS, data));
+  obj.then(function(result) {
+    res.status(200);
+    res.json(result.data);
+  }).catch(function(error) {
+    res.status(error.status);
+    res.json(null);
   });
+  return;
 }
 
-// Express framework friendly
-drossel.response = function(res, drosselPromise) {
-  drosselPromise.then(function(result) {
-    res.status(200);
-    res.json(result);
-  }).catch(function(error) {
-    res.status(error.status.code);
-    res.json(error);
-  });
-};
+/**
+ * status
+ *
+ * @return {Object} HTTP status code constants
+ */
+drmg.status = status;
 
-module.exports = drossel;
+module.exports = drmg;
