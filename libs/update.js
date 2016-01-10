@@ -2,22 +2,28 @@ var response = require('./response');
 var status = require('./status');
 
 function update(model, id, conditions) {
-  return model.update({_id: id}, conditions, {runValidators: true}, function(err, result) {
-    if (err && err.name == 'ValidationError') {
-      return Promise.reject(response(status.FAILURE_BAD_REQUEST));
-    }
-    if (err && err.name == 'CastError') {
-      return Promise.reject(response(status.FAILURE_BAD_REQUEST));
-    }
-    if (err) {
-      return Promise.reject(response(status.FAILURE_INTERNAL));
-    }
-    // fetch updated result
-    model.findById(id, function(err, result) {
-      if (err) {
-        return Promise.reject(response(status.FAILURE_INTERNAL));
+  return new Promise(function(resolve, reject) {
+    model.update({_id: id}, conditions, {runValidators: true}, function(err, result) {
+      if (err && err.name == 'ValidationError') {
+        reject(response(status.FAILURE_BAD_REQUEST));
+        return;
       }
-      return Promise.resolve(response(status.SUCCESS, result));
+      if (err && err.name == 'CastError') {
+        reject(response(status.FAILURE_BAD_REQUEST));
+        return;
+      }
+      if (err) {
+        reject(response(status.FAILURE_INTERNAL));
+        return;
+      }
+      // fetch updated result
+      model.findById(id, function(err, result) {
+        if (err) {
+          reject(response(status.FAILURE_INTERNAL));
+          return;
+        }
+        resolve(response(status.SUCCESS, result));
+      });
     });
   });
 }
