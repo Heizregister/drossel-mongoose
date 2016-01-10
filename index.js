@@ -5,6 +5,7 @@ var findById = require('./libs/find-by-id');
 var update = require('./libs/update');
 var remove = require('./libs/remove');
 var status = require('./libs/status');
+var response = require('./libs/response');
 
 var drmg = {};
 
@@ -65,21 +66,12 @@ drmg.remove = function(model, conditions) {
 };
 
 /**
- * response (Express framework friendly)
+ * expressResponse (Express framework friendly)
  *
  * @param {Object} res Express response object
- * @param {Promises|Object} obj drossel-mongoose result (or custom response)
- * @param {Number} obj.status HTTP status code
- * @param {Object} obj.data result json
+ * @param {Promises} response drossel-mongoose response
  */
-drmg.response = function(res, obj) {
-  // custom response
-  if (obj.status) {
-    res.status(obj.status);
-    res.json(obj.data ? obj.data : null);
-    return;
-  }
-
+drmg.expressResponse = function(res, response) {
   obj.then(function(result) {
     res.status(200);
     res.json(result.data);
@@ -89,6 +81,15 @@ drmg.response = function(res, obj) {
   });
   return;
 };
+
+/**
+ * response
+ *
+ * @param {Number} status HTTP status code
+ * @param {Object} data JSON result
+ * @return {Promise}
+ */
+drmg.response = response;
 
 /**
  * status
@@ -101,17 +102,14 @@ drmg.status = status;
  * all
  *
  * @param {Array} arr many drosselMongooseResult
- * @return {Primises} drosselMongooseResult
+ * @return {Primise} drossel-mongoose response
  */
 drmg.all = function(arr) {
   return Promise.all(arr).then(function(results) {
     var data = _.map(results, function(item) {
       return item.data;
     });
-    return {
-      status: 200,
-      data: data;
-    }
+    return drmg.response(drmg.status.SUCCESS, data);
   });
 };
 

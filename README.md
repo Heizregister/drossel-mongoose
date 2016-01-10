@@ -63,7 +63,7 @@ drmg.remove(model, { _id: 1234567890abcdef12345678 });
 
 ### All (array)
 Promise.all for drossel-mongoose.  
-return drossel-mongoose result.
+return drossel-mongoose response.
 ```
 drmg.all([
   drmg.find(model, {foo: 'foo'}),
@@ -71,11 +71,23 @@ drmg.all([
 ]);
 ```
 
+### response (status, data)
+return custom drossel-mongoose response.
+```
+drmg.response(drmg.status.SUCCESS, {
+  lgtm: 'Looks Good To Me!'
+});
+```
+
 ### status
 return HTTP status code list.
 ```
 console.log(drmg.status.SUCCESS) //200
 ```
+
+### expressResponse (res, response)
+useful to Express framework.
+Please refer to the example of use for more information.
 
 ## Example
 drossel-mongoose returns Promises.  
@@ -92,21 +104,20 @@ drmg.find(model, {}).then(function(result) {
 ```
 
 If you're using the Express framework,  
-it can response the `res.status()` and `res.json()`, when you use the `drmg.response()`.
+it can response the `res.status()` and `res.json()`, when you use the `drmg.expressResponse()`.
 ```
 var router = express.Router();
 router.get('/:id?', function(req, res, next) {
-  drmg.response(res, drmg.findById(model, req.params.id));
+  drmg.expressResponse(res, drmg.findById(model, req.params.id));
 };
 ```
 
-and, it can custom response.
+or, it can custom response.
 ```
 var router = express.Router();
 router.get('/', function(req, res, next) {
-  drmg.response(res, {
-    status: drmg.status.SUCCESS,
-    data: { lgtm: 'Looks Good To Me!' }
-  });
-};
+  drmg.expressResponse(res, drmg.response(drmg.status.SUCCESS, {
+    lgtm: 'Looks Good To Me!'
+  }));
+});
 ```
