@@ -2,7 +2,7 @@ var response = require('./response');
 var status = require('./status');
 
 function update(model, id, conditions) {
-  model.update({_id: id}, conditions, {runValidators: true}, function(err, result) {
+  return model.update({_id: id}, conditions, {runValidators: true}, function(err, result) {
     if (err && err.name == 'ValidationError') {
       return Promise.reject(response(status.FAILURE_BAD_REQUEST));
     }

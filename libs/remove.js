@@ -2,7 +2,7 @@ var response = require('./response');
 var status = require('./status');
 
 function remove(model, conditions) {
-  model.remove(conditions, function(err) {
+  return model.remove(conditions, function(err) {
     if (err) {
       return Promise.reject(response(status.FAILURE_INTERNAL));
     }

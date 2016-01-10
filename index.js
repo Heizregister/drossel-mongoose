@@ -72,7 +72,7 @@ drmg.remove = function(model, conditions) {
  * @param {Promises} response drossel-mongoose response
  */
 drmg.expressResponse = function(res, response) {
-  obj.then(function(result) {
+  response.then(function(result) {
     res.status(200);
     res.json(result.data);
   }).catch(function(error) {

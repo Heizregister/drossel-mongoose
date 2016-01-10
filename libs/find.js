@@ -2,7 +2,7 @@ var response = require('./response')
 var status = require('./status');
 
 function find(model, conditions) {
-  model.find(conditions, function(err, result) {
+  return model.find(conditions, function(err, result) {
     if (err && err.name == 'ValidationError') {
       return Promise.reject(response(status.FAILURE_BAD_REQUEST));
     }
