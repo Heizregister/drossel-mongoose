@@ -26,22 +26,22 @@ var model = mongoose.model('Example', new mongoose.Schema({
 
 ### Create (model, obj)
 Create data.  
-return created data object.
+return drossel-mongoose response, into created data object.
 ```
 drmg.create(model, { foo: 'abc', bar: 123 });
 ```
 
 ### Find (model, conditions)
 Find data.  
-return find data objects array.  
-Tips: If no result, resolve "no content".
+return drossel-mongoose response, into find data objects array.
+Tips: If no result, resolve "success".
 ```
 drmg.find(model, { foo: 'abc' });
 ```
 
 ### FindById (model, objectId)
 Find data from ID.  
-return find data object.  
+return drossel-mongoose response, into find data object.
 Tips: If no result, reject "not found".
 ```
 drmg.findById(model, 1234567890abcdef12345678);
@@ -49,14 +49,14 @@ drmg.findById(model, 1234567890abcdef12345678);
 
 ### Update (model, objectId, obj)
 Update data.  
-return updated data object.
+return drossel-mongoose response, into updated data object.
 ```
 drmg.update(model, 1234567890abcdef12345678, { foo: 'xyz', bar: 456 });
 ```
 
 ### Remove (model, conditions)
 Remove data.  
-return null.
+return drossel-mongoose response, into null.
 ```
 drmg.remove(model, { _id: 1234567890abcdef12345678 });
 ```
@@ -79,11 +79,11 @@ console.log(drmg.status.SUCCESS) //200
 ```
 
 ### response (status, data)
-return custom drossel-mongoose response.
+return drossel-mongoose response.
 ```
 drmg.response(drmg.status.SUCCESS, {
   lgtm: 'LGTM!'
-}); // {status: 200, data: {lgtm: 'LGTM!'}}
+}); // Promise.<{status: 200, data: {lgtm: 'LGTM!'}}>
 ```
 
 ### expressResponse (res, response)

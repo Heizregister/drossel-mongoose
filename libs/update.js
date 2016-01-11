@@ -2,28 +2,22 @@ var response = require('./response');
 var status = require('./status');
 
 function update(model, id, conditions) {
-  return new Promise(function(resolve, reject) {
-    model.update({_id: id}, conditions, {runValidators: true}, function(err, result) {
-      if (err && err.name == 'ValidationError') {
-        reject(response(status.FAILURE_BAD_REQUEST));
-        return;
-      }
-      if (err && err.name == 'CastError') {
-        reject(response(status.FAILURE_BAD_REQUEST));
-        return;
-      }
+  return model.update({_id: id}, conditions, {runValidators: true}, function(err, result) {
+    if (err && err.name == 'ValidationError') {
+      return response(status.FAILURE_BAD_REQUEST);
+    }
+    if (err && err.name == 'CastError') {
+      return response(status.FAILURE_BAD_REQUEST);
+    }
+    if (err) {
+      return response(status.FAILURE_INTERNAL);
+    }
+    // fetch updated result
+    return model.findById(id, function(err, result) {
       if (err) {
-        reject(response(status.FAILURE_INTERNAL));
-        return;
+        return response(status.FAILURE_INTERNAL);
       }
-      // fetch updated result
-      model.findById(id, function(err, result) {
-        if (err) {
-          reject(response(status.FAILURE_INTERNAL));
-          return;
-        }
-        resolve(response(status.SUCCESS, result));
-      });
+      return response(status.SUCCESS, result);
     });
   });
 }
