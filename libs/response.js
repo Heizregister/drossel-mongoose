@@ -1,13 +1,18 @@
+var statusCode = require('./status');
+
 function response(status, data) {
-  if (status !== 200) {
-    return Promise.reject({
-      status: status,
+  return new Promise(function(resolve, reject) {
+    if (status !== statusCode.SUCCESS) {
+      reject({
+        status: status,
+        data: null
+      });
+      return;
+    }
+    resolve({
+      status: statusCode.SUCCESS,
       data: data ? data : null
     });
-  }
-  return Promise.resolve({
-    status: status,
-    data: data ? data : null
   });
 }
 
