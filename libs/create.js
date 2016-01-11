@@ -2,17 +2,19 @@ var response = require('./response');
 var status = require('./status');
 
 function create(model, conditions) {
-  return model.create(conditions, function(err, result) {
-    if (err && err.name == 'ValidationError') {
-      return response(status.FAILURE_BAD_REQUEST);
-    }
-    if (err && err.name == 'CastError') {
-      return response(status.FAILURE_BAD_REQUEST);
-    }
-    if (err) {
-      return response(status.FAILURE_INTERNAL);
-    }
-    return response(status.SUCCESS, result);
+  return new Promise(function(resolve, reject) {
+    model.create(conditions, function(err, result) {
+      if (err && err.name == 'ValidationError') {
+        reject(response(status.FAILURE_BAD_REQUEST));
+      }
+      if (err && err.name == 'CastError') {
+        reject(response(status.FAILURE_BAD_REQUEST));
+      }
+      if (err) {
+        reject(response(status.FAILURE_INTERNAL));
+      }
+      resolve(response(status.SUCCESS, result));
+    });
   });
 }
 

@@ -1,7 +1,7 @@
 {
   "name": "drossel-mongoose",
   "description": "Unnecessary mongoose wrapper",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "author": "nanocloudx <nanocloudx@gmail.com>",
   "homepage": "http://drossel.io/",
   "license": "MIT",
