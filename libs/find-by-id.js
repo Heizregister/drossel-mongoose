@@ -5,18 +5,18 @@ function findById(model, id) {
   return new Promise(function(resolve, reject) {
     model.findById(id, function(err, result) {
       if (err && err.name == 'ValidationError') {
-        reject(response(status.FAILURE_BAD_REQUEST));
+        reject({status: status.FAILURE_BAD_REQUEST});
       }
       if (err && err.name == 'CastError') {
-        reject(response(status.FAILURE_BAD_REQUEST));
+        reject({status: status.FAILURE_BAD_REQUEST});
       }
       if (err) {
-        reject(response(status.FAILURE_INTERNAL));
+        reject({status: status.FAILURE_INTERNAL});
       }
       if (!result) {
-        reject(response(status.FAILURE_NOT_FOUND));
+        reject({status: status.FAILURE_NOT_FOUND});
       }
-      resolve(response(status.SUCCESS, result));
+      resolve({status: status.SUCCESS, data: result});
     });
   });
 }

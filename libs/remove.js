@@ -5,9 +5,9 @@ function remove(model, conditions) {
   return new Promise(function(resolve, reject) {
     model.remove(conditions, function(err) {
       if (err) {
-        reject(response(status.FAILURE_INTERNAL));
+        reject({status: status.FAILURE_INTERNAL});
       }
-      resolve(response(status.SUCCESS));
+      resolve({status: status.SUCCESS});
     });
   });
 }
