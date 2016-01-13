@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var create = require('./libs/create');
 var find = require('./libs/find');
+var findOne = require('./libs/find-one');
 var findById = require('./libs/find-by-id');
 var update = require('./libs/update');
 var remove = require('./libs/remove');
@@ -29,6 +30,17 @@ drmg.create = function(model, obj) {
  */
 drmg.find = function(model, conditions) {
   return find(model, conditions);
+};
+
+/**
+ * find
+ *
+ * @param {Object} model mongoose model
+ * @param {Object} conditions conditions
+ * @return {Promise.<Object>} drossel-mongoose response
+ */
+drmg.findOne = function(model, conditions) {
+  return findOne(model, conditions);
 };
 
 /**

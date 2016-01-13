@@ -39,6 +39,14 @@ Tips: If no result, resolve "success".
 drmg.find(model, { foo: 'abc' });
 ```
 
+### FindOne (model, conditions)
+Find data.
+return drossel-mongoose response, into find data object.
+Tips: If no result, reject "not found".
+```
+drmg.find(model, { foo: 'abc' });
+```
+
 ### FindById (model, objectId)
 Find data from ID.  
 return drossel-mongoose response, into find data object.
